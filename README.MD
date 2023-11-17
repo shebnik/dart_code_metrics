@@ -12,7 +12,7 @@ This is a simple Python script to automate the process of running the [Dart Code
     ```
 3. Run the script
     ```bash
-    python3 dart_code_metrics.py
+    python3 main.py
     ```
 
 ## Output
