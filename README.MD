@@ -9,6 +9,7 @@ This is a simple Python script to automate the process of running the [Dart Code
 2. Install the dependencies
     ```bash
     dart pub global activate dart_code_metrics
+    dart pub global activate dart_class_analyzer
     ```
 3. Run the script
     ```bash

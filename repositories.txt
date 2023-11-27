@@ -4,8 +4,7 @@ https://github.com/shebnik/PersonalFinanceApp
 https://github.com/nafishahmeddev/fintracker
 https://github.com/robert-muriithi/Game-Flix
 https://github.com/fregie/pho
-https://github.com/krille-chan/fluffychat
-https://github.com/picnic-app-cool/picnic-app
+https://github.com/RivaanRanawat/flutter_twitter_clone
 https://github.com/HypeTeqSoftware/FitnessApp
 https://github.com/R8bert/busappschedule
 https://github.com/AbdQader/flutter_grocery_app
@@ -16,7 +15,7 @@ https://github.com/mbcorona/flutter_cars_app
 https://github.com/aymanattieh77/fashion-app
 https://github.com/AbdQader/flutter_ecommerce_app
 https://github.com/iManYarahmadi/TravelApp
-https://github.com/anandnet/Harmony-Music
+https://github.com/krishna-kpa/E-Class
 https://github.com/AmirBayat0/Flutter-Travel-App
 https://github.com/tanvir-robin/weather-app
 https://github.com/MasteerRui/WeatherApp-Flutter
@@ -42,9 +41,10 @@ https://github.com/dreautall/waterfly-iii
 https://github.com/IsaiasCuvula/quote_generator
 https://github.com/HossamShafeek/Weather-App
 https://github.com/dstark5/Openlib
-https://github.com/FriesI23/mhabit
-https://github.com/Myzel394/locus
+https://github.com/javedahm3d/instagram-clone-using-flutter-and-firebase
+https://github.com/Ruslanbek0809/Yummify
 https://github.com/adityar224/FlutterMarkdownEditor
 https://github.com/cem256/manga_clean_arch
 https://github.com/Shashank02051997/AgentX-Flutter
 https://github.com/riccardocescon/clean_chess
+https://github.com/kronos-et-al/MensaApp
