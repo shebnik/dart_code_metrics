@@ -28,8 +28,6 @@ https://github.com/dicky7/ngandika_app
 https://github.com/suleymangunes/TradingView-app
 https://github.com/Re4ch-Jay/Meditation_App
 https://github.com/darkmoonight/Rain
-https://github.com/mohammadfallah7/mnml_ecommerce_application
-https://github.com/rafaymushtaq05/flutter_tourism_app
 https://github.com/wwwwww3q/social_app
 https://github.com/EmirBashiri/Flutter-E-commerce-X
 https://github.com/alireza4585/Flutter-Shopping-App
@@ -39,7 +37,6 @@ https://github.com/Hamad-Anwar/Task-Sync-Pro-V2
 https://github.com/nightFuryman/flutter-feed-app
 https://github.com/dreautall/waterfly-iii
 https://github.com/IsaiasCuvula/quote_generator
-https://github.com/HossamShafeek/Weather-App
 https://github.com/dstark5/Openlib
 https://github.com/javedahm3d/instagram-clone-using-flutter-and-firebase
 https://github.com/Ruslanbek0809/Yummify
@@ -48,3 +45,6 @@ https://github.com/cem256/manga_clean_arch
 https://github.com/Shashank02051997/AgentX-Flutter
 https://github.com/riccardocescon/clean_chess
 https://github.com/kronos-et-al/MensaApp
+https://github.com/kaina404/FlutterDouBan
+https://github.com/simplezhli/flutter_deer
+https://github.com/iampawan/FlutterWhatsAppClone

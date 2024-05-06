@@ -10,6 +10,7 @@ This is a simple Python script to automate the process of running the [Dart Code
     ```bash
     dart pub global activate dart_code_metrics
     dart pub global activate dart_class_analyzer
+    dart pub global activate lakos
     ```
 3. Run the script
     ```bash
@@ -18,9 +19,13 @@ This is a simple Python script to automate the process of running the [Dart Code
 
 ## Output
 The output is stored in a CSV file named `output.csv`. The columns are:
-- Repository url
-- Lines of code
-- Number of classes
+- URL of Repository
+- LOC (Lines of Code)
+- NOC (Number of Classes)
+- NOM (Number of Methods)
+- Number of libraries
+- Number of dependencies
+- CCD (Cumulative Component Dependency)
 - Cyclomatic Complexity
 - Maintainability Index
 - Average Cyclomatic Number per line of code

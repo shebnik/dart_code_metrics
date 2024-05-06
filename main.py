@@ -21,25 +21,52 @@ os.chdir(directory)
 # Clone repositories and run Dart Code Metrics
 i = 1
 for repo in repositories:
+    path = os.path.join(os.getcwd(), str(i))
+    
     # Clone the repository
-    subprocess.run(f"git clone {repo} {str(i)}", shell=True)
-    # input(f"Press Enter to continue... {str(i)}")
+    try:
+        subprocess.run(f"git clone {repo} {path}", shell=True)
+    except Exception as e:
+        print(e)
+        csv_rows.append([repo, "", "", "", "", "", "", "", "", "", ""])
+        continue
+
+    # check if pubspec.yaml exists, if not, cd to the nested directory containing it
+    if not os.path.exists(os.path.join(path, "pubspec.yaml")):
+        for subdir, dirs, files in os.walk(path):
+            for file in files:
+                if file == "pubspec.yaml":
+                    # Change to the nested directory
+                    path = subdir
+                    break
+    
+    lib_path = os.path.join(path, "lib")
 
     # Run Dart Code Metrics tool
-    subprocess.run(
-        "metrics lib -r html --json-path metrics.json", shell=True, cwd=str(i)
-    )
+    subprocess.run(f"metrics lib -r html --json-path metrics.json", shell=True, cwd=path)
 
     # Run Dart Class Analyzer tool
     method_count = subprocess.run(
-        f"dart pub global run dart_class_analyzer:method_counter {str(i)}/lib",
+        f"dart pub global run dart_class_analyzer:method_counter {lib_path}",
         shell=True,
         stdout=subprocess.PIPE,
         text=True,
     )
+
+    # Run Lakos tool
+    lakos_output = subprocess.run(
+        f"dart pub global run lakos {lib_path} -m",
+        shell=True,
+        stdout=subprocess.PIPE,
+        text=True,
+    )
+    lakos_metrics = [
+        line for line in lakos_output.stdout.split("\n") if "metrics" in line
+    ][0]
+
     try:
         # Read the HTML file
-        with open(f"{str(i)}/metrics/index.html", "r") as file:
+        with open(f"{os.path.join(path, "metrics", "index.html")}", "r", encoding="utf-8") as file:
             html_content = file.read()
 
         # Parse the HTML content
@@ -55,7 +82,7 @@ for repo in repositories:
         )
 
         # Read the JSON file
-        with open(f"{str(i)}/metrics.json") as f:
+        with open(f"{os.path.join(path, "metrics.json")}", "r", encoding="utf-8") as f:
             data = json.load(f)
 
         # Extract the required data and store it in a list of lists
@@ -68,26 +95,34 @@ for repo in repositories:
                 cyclomatic_number = item["value"]
             elif item["title"] == "Average Source Lines of Code per method":
                 source_lines_of_code = item["value"]
-                try: 
+                try:
                     num_methods = int(method_count.stdout.strip())
-                except: 
+                except:
                     num_methods = ""
+                num_nodes = int(lakos_metrics.split("numNodes: ")[1].split(r"  \l")[0])
+                num_edges = int(lakos_metrics.split("numEdges: ")[1].split(r"  \l")[0])
+                ccd = int(lakos_metrics.split("ccd: ")[1].split(r" \l")[0])
+
                 csv_rows.append(
                     [
                         repo,
                         lines_of_code,
                         num_classes,
                         num_methods,
+                        num_edges,
+                        num_nodes,
+                        ccd,
                         cyclomatic_complexity,
                         maintainability_index,
                         cyclomatic_number,
                         source_lines_of_code,
                     ]
                 )
-    except:
-        csv_rows.append([repo, "", "", "", "", "", "", ""])
+    except Exception as e:
+        print(e)
+        csv_rows.append([repo, "", "", "", "", "", "", "", "", "", ""])
 
-    shutil.rmtree(str(i), ignore_errors=True)
+    # shutil.rmtree(path, ignore_errors=True)
     i += 1
 
 # Write the list of lists to a CSV file
@@ -96,9 +131,12 @@ with open(os.path.join(results_dir, "results.csv"), "w", newline="") as f:
     writer.writerow(
         [
             "URL",
-            "LOC",
-            "NOC",
-            "NOM",
+            "LOC (Lines of Code)",
+            "NOC (Number of Classes)",
+            "NOM (Number of Methods)",
+            "Number of libraries",
+            "Number of dependencies",
+            "CCD (Cumulative Component Dependency)",
             "Cyclomatic Complexity",
             "Maintainability Index",
             "Average Cyclomatic Number per line of code",
@@ -106,3 +144,4 @@ with open(os.path.join(results_dir, "results.csv"), "w", newline="") as f:
         ]
     )
     writer.writerows(csv_rows)
+    shutil.rmtree(directory, ignore_errors=True)
